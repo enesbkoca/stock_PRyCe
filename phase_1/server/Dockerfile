@@ -1,7 +1,7 @@
 FROM python:3.9-slim-buster
 
 # App dependencies
-RUN pip install rpyc
+RUN pip install rpyc requests
 
 # Set the working directory
 WORKDIR app

@@ -2,9 +2,12 @@ import rpyc
 import sys
 import random
 import socket
+import requests
 
 
 class StockPrice(rpyc.Service):
+    ALPHA_VANTAGE_API_KEY = '5LPFOU26RW6ESOZN'
+
     def on_connect(self, conn):
         pass
 
@@ -12,9 +15,18 @@ class StockPrice(rpyc.Service):
         pass
 
     def exposed_get_price(self, stock):
-        stock_price = random.uniform(0, 150)
-        print(f"Price of {stock} at ${stock_price:.2f}", flush=True)
-        return stock_price
+        try:
+            url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={stock}&interval=1min&apikey={self.ALPHA_VANTAGE_API_KEY}'
+            response = requests.get(url)
+            data = response.json()
+            latest_close_price = data['Time Series (1min)'][list(data['Time Series (1min)'].keys())[0]]['4. close']
+            return float(latest_close_price)
+        except Exception as e:
+            print(f"Error retrieving stock price for {stock}: {e}")
+            return None
+        # stock_price = random.uniform(0, 150)
+        # print(f"Price of {stock} at ${stock_price:.2f}", flush=True)
+        # return stock_price
 
 
 if __name__ == "__main__":

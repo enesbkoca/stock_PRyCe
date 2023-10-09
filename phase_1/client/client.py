@@ -9,5 +9,8 @@ print("Connected")
 while True:
     index = "".join(choices(ascii_uppercase, k=3))
     price = conn.root.get_price(index)
-    print(f"Price of {index} is ${price:.2f}", flush=True)
+    if price is None:
+        print(f"stock not found.",flush=True)
+    else:
+        print(f"Price of {index} is ${price:.2f}", flush=True)
     time.sleep(5)
