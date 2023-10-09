@@ -7,6 +7,7 @@ conn = rpyc.connect("localhost", 18861)
 print("Connected")
 
 while True:
+    #test comment
     index = "".join(choices(ascii_uppercase, k=3))
     price = conn.root.get_price(index)
     if price is None:
@@ -14,3 +15,4 @@ while True:
     else:
         print(f"Price of {index} is ${price:.2f}", flush=True)
     time.sleep(5)
+ 
