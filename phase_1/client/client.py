@@ -6,7 +6,12 @@ conn = rpyc.connect("localhost", 18861)
 print("Connected")
 
 while True:
-    symbols = ['SPY','IBM', 'CMCSA','AAPL','MSFT'] # example symbols
+    symbols = [
+        "AAPL", "GOOGL", "MSFT", "AMZN", "META", "TSLA", "NVDA", "JPM", "GS", "JNJ",
+        "WMT", "PG", "DIS", "CSCO", "INTC", "ADBE", "NFLX", "CRM", "VZ",
+        "KO", "PEP", "PFE", "MRK", "NKE", "BA", "GE", "IBM", "COST"
+    ]
+
     random_symbol = random.choice(symbols)
     price, timestamp = conn.root.get_price(random_symbol)
 
