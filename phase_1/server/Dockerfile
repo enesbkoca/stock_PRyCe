@@ -8,6 +8,7 @@ WORKDIR app
 
 # Install app
 COPY server.py .
+COPY api.py .
 
 # Expose port
 EXPOSE 18861

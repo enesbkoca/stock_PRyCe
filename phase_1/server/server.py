@@ -1,10 +1,9 @@
 import rpyc
 import socket
-import requests
+from api import get_price
 
 
 class StockPrice(rpyc.Service):
-    ALPHA_VANTAGE_API_KEY = '128O8QIAV37G1SE0'#'5LPFOU26RW6ESOZN'
 
     def on_connect(self, conn):
         pass
@@ -13,26 +12,9 @@ class StockPrice(rpyc.Service):
         pass
 
     def exposed_get_price(self, stock):
-        try:
-            url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={stock}&interval=1min&apikey={self.ALPHA_VANTAGE_API_KEY}'
-            response = requests.get(url)
-            data = response.json()
+        stock_price = get_price(stock)
 
-            # Check if 'Time Series (1min)' key exists and has data
-            if 'Time Series (1min)' in data and data['Time Series (1min)']:
-                latest_open_price = data['Time Series (1min)'][list(data['Time Series (1min)'].keys())[0]]['1. open']
-                timestamp = list(data['Time Series (1min)'].keys())[0]
-                print(f"Returning latest open price to client for {stock}:  ${latest_open_price} ({timestamp})")
-            else:
-                latest_open_price = -1
-                timestamp = -1
-                print("API limit reached.")
-
-            return float(latest_open_price), timestamp
-        
-        except Exception as e:
-            print(f"Error retrieving stock price for {stock}: {e}")
-            return None
+        return stock_price
 
 
 if __name__ == "__main__":
