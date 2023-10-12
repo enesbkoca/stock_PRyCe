@@ -25,5 +25,5 @@ while True:
     else:
         print(f"Stock {random_symbol} not found or APIs not available", flush=True)
 
-    time.sleep(5)
+    # time.sleep(5)
  
