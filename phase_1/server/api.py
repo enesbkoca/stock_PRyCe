@@ -2,6 +2,8 @@ import requests
 import datetime as dt
 
 ALPHA_VANTAGE_API_KEY = '128O8QIAV37G1SE0'  # '5LPFOU26RW6ESOZN'
+counter = 0
+
 
 def price_alpha(symbol):
     try:
@@ -61,12 +63,19 @@ def price_yahoo(symbol):
 
 
 def get_price(symbol):
+    global counter
+
     price, timestamp = price_alpha(symbol)
 
     if not price or not timestamp:
         price, timestamp = price_yahoo(symbol)
 
     if not price or not timestamp:
-        print("Failed to retreive price of ", symbol)
+        print("Failed to retrieve price of ", symbol)
+    else:
+        counter += 1
+
+    if counter % 10 == 0:
+        print(f"Total successful times the stock price was retrieved: {counter}")
 
     return price, timestamp

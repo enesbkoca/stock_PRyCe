@@ -4,7 +4,6 @@ from api import get_price
 
 
 class StockPrice(rpyc.Service):
-
     def on_connect(self, conn):
         pass
 
@@ -13,7 +12,6 @@ class StockPrice(rpyc.Service):
 
     def exposed_get_price(self, stock):
         stock_price = get_price(stock)
-
         return stock_price
 
 

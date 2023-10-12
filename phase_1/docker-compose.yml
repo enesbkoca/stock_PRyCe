@@ -13,4 +13,4 @@ services:
     network_mode:
       "host"
     deploy:
-      replicas: 1
+      replicas: 3
