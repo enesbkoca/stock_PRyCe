@@ -2,7 +2,9 @@ import time
 import rpyc
 import random
 
-conn = rpyc.connect("localhost", 18861)
+response_times = []
+
+conn = rpyc.connect("localhost", 80)
 print("Connected")
 
 while True:
@@ -20,10 +22,14 @@ while True:
 
     duration = after_request - before_request
 
+    response_times.append(duration)
+    avg = sum(response_times)/len(response_times)
+
+
     if price:
-        print(f"Latest open price for {random_symbol} is ${price:.2f} | ({timestamp}) | {duration}", flush=True)
+        print(f"Latest open price for {random_symbol} is ${price:.2f} | ({timestamp}) | {avg}", flush=True)
     else:
         print(f"Stock {random_symbol} not found or APIs not available", flush=True)
 
-    # time.sleep(5)
+    time.sleep(5)
  
