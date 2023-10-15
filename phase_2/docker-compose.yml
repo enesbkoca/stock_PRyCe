@@ -5,7 +5,7 @@ services:
     build:
       context: ./server
     ports:
-      - "18861:18861"
+      - "18863-18865:18861"
 
   client:
     build:
