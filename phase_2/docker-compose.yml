@@ -11,7 +11,7 @@ services:
     build:
       context: ./client
     depends_on:
-      - rpyc_backend
+      - nginx
     network_mode:
       "host"
     deploy:
