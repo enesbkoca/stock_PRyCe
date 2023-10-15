@@ -4,7 +4,7 @@ import random
 
 response_times = []
 
-conn = rpyc.connect("localhost", 80)
+conn = rpyc.connect('localhost', 80)
 print("Connected")
 
 while True:
