@@ -14,8 +14,8 @@ class StockPrice(rpyc.Service):
     def exposed_get_price(self, stock):
         # time.sleep(10)
 
-        stock_price = 10, "23:34"
-        # stock_price = get_price(stock)
+        # stock_price = 10, "23:34"
+        stock_price = get_price(stock)
         return stock_price
 
 
