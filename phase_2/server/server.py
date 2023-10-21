@@ -13,11 +13,7 @@ class StockPrice(rpyc.Service):
         pass
 
     def exposed_get_price(self, stock):
-        # time.sleep(10)
-
-        # stock_price = 10, "23:34"
         stock_price = get_price(stock)
-        print("Returning {} @ {}".format(stock, stock_price[0]))
         return stock_price
 
 
