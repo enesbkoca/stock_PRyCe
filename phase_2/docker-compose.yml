@@ -7,7 +7,7 @@ services:
     environment:
       - PORT=18861
     ports:
-      - "18863-18865:18861"
+      - "18861:18861"
 
   rpyc_backend_2:
     build:
@@ -37,11 +37,11 @@ services:
       replicas: 100
 
   nginx:
-    image: nginx:alpine
+    build:
+      context: ./nginx
     ports:
       - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - rpyc_backend_1
-
+      - rpyc_backend_2
+      - rpyc_backend_3
