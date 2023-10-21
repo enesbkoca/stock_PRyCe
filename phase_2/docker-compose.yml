@@ -34,7 +34,7 @@ services:
     network_mode:
       "host"
     deploy:
-      replicas: 100
+      replicas: 3
 
   nginx:
     build:
@@ -45,3 +45,11 @@ services:
       - rpyc_backend_1
       - rpyc_backend_2
       - rpyc_backend_3
+
+  statistics:
+    build:
+      context: ./statistics
+    depends_on:
+      - nginx
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
