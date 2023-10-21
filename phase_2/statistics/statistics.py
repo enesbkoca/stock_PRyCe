@@ -37,6 +37,6 @@ def get_logs():
 
 if __name__ == "__main__":
     while True:
-        time.sleep(5)
+        time.sleep(10)
         get_logs()
         print(f"Average time for resolving {counter} requests: {avg_response_time}")

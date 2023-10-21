@@ -10,4 +10,4 @@ WORKDIR app
 COPY statistics.py .
 
 # Run the Python script when the container starts
-CMD ["python", "statistics.py"]
+CMD ["python", "-u", "statistics.py"]
