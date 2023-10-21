@@ -25,8 +25,10 @@ while True:
             print(f"Latest open price for {random_symbol} is ${price:.2f} | ({timestamp}) | {duration}", flush=True)
         else:
             print(f"Stock {random_symbol} not found or APIs not available", flush=True)
-
+            
+        conn.close()
         time.sleep(5)
+        
     except Exception as e:
         print(f"Client retrying to connect!")
  
