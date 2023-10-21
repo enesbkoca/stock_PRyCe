@@ -34,7 +34,7 @@ services:
     network_mode:
       "host"
     deploy:
-      replicas: 3
+      replicas: 30
 
   nginx:
     build:
