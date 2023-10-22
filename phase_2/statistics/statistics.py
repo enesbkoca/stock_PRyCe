@@ -10,7 +10,7 @@ def make_float(string):
 
 
 def get_logs():
-    avg_response_time = 0
+    total_response_time = 0
     counter = 0
 
     docker_client = docker.from_env()
@@ -24,12 +24,10 @@ def get_logs():
             if not response_time:
                 continue
 
-            if not counter:
-                counter = 1
-                avg_response_time = response_time
+            counter += 1
+            total_response_time += response_time
 
-            # Compute the new avg response time
-            counter, avg_response_time = counter + 1, (avg_response_time * counter + response_time) / (counter + 1)
+    avg_response_time = total_response_time / counter if counter else None
 
     return counter, avg_response_time
 
