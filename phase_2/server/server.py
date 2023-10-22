@@ -7,9 +7,11 @@ from rpyc.utils.server import ThreadedServer
 
 class StockPrice(rpyc.Service):
     def on_connect(self, conn):
+        print("Client Connected")
         pass
 
     def on_disconnect(self, conn):
+        print("Client Disconnected")
         pass
 
     def exposed_get_price(self, stock):
@@ -18,8 +20,6 @@ class StockPrice(rpyc.Service):
 
 
 if __name__ == "__main__":
-
-
     hostname = socket.gethostname()  # Get the hostname of the server
     ip_address = socket.gethostbyname(hostname)  # Get the IP address corresponding to the hostname
     print(f"Server starting on {hostname} ({ip_address})")  # Print or log the IP address
