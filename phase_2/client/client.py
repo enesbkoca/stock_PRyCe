@@ -16,6 +16,9 @@ while True:
         random_symbol = random.choice(symbols)
 
         before_request = time.time()
+
+
+        print("Sending request")
         price, timestamp = conn.root.get_price(random_symbol)
         after_request = time.time()
 
