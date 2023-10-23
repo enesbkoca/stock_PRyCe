@@ -8,6 +8,12 @@ services:
       - PORT=18861
     ports:
       - "18861:18861"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.02'
+#          memory: 50M
+
 
   rpyc_backend_2:
     build:
@@ -16,6 +22,11 @@ services:
       - PORT=18862
     ports:
       - "18862:18862"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.02'
+#          memory: 50M
 
   rpyc_backend_3:
     build:
@@ -24,7 +35,11 @@ services:
       - PORT=18863
     ports:
       - "18863:18863"
-
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.02'
+#          memory: 50M
 
   client:
     build:
