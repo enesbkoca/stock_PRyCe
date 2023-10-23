@@ -7,11 +7,11 @@ from rpyc.utils.server import ThreadedServer
 
 class StockPrice(rpyc.Service):
     def on_connect(self, conn):
-        print("Client Connected")
+        # print("Client Connected")
         pass
 
     def on_disconnect(self, conn):
-        print("Client Disconnected")
+        # print("Client Disconnected")
         pass
 
     def exposed_get_price(self, stock):

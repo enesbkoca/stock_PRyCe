@@ -2,10 +2,6 @@ import docker
 import time
 
 
-avg_response_time = 0
-counter = 0
-
-
 def make_float(string):
     try:
         return float(string)
@@ -14,8 +10,9 @@ def make_float(string):
 
 
 def get_logs():
-    global avg_response_time
-    global counter
+    total_response_time = 0
+    counter = 0
+
     docker_client = docker.from_env()
     clients = [container for container in docker_client.containers.list() if ('client' in container.name)]
 
@@ -27,16 +24,16 @@ def get_logs():
             if not response_time:
                 continue
 
-            if not counter:
-                counter = 1
-                avg_response_time = response_time
+            counter += 1
+            total_response_time += response_time
 
-            # Compute the new avg response time
-            counter, avg_response_time = counter + 1, (avg_response_time * counter + response_time) / (counter + 1)
+    avg_response_time = total_response_time / counter if counter else None
+
+    return counter, avg_response_time
 
 
 if __name__ == "__main__":
     while True:
         time.sleep(10)
-        get_logs()
+        counter, avg_response_time = get_logs()
         print(f"Average time for resolving {counter} requests: {avg_response_time}")
