@@ -18,7 +18,7 @@ while True:
         before_request = time.time()
 
 
-        print("Sending request")
+        #print("Sending request")
         price, timestamp = conn.root.get_price(random_symbol)
         after_request = time.time()
 
