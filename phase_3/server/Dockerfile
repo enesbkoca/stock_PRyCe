@@ -9,6 +9,7 @@ WORKDIR app
 # Install app
 COPY server.py .
 COPY api.py .
+COPY healthcheck.py .
 
 # Run the Python script when the container starts
 CMD ["python", "-u", "server.py"]

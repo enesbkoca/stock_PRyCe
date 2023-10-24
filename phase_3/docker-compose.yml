@@ -9,11 +9,10 @@ services:
     ports:
       - "18861:18861"
     healthcheck:
-      test: ["CMD", "python", "./server/health_check.py"]
-      interval: 5s
-      retries: 2
-      start_period: 5s
-      timeout: 60s
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 5s #re-execute the check, interval seconds after a previous check
+      timeout: 10s # times out after mentioned timeout seconds
+      retries: 2 #consider the container unhealthy after retries consecutive failures. Any other response other than success results into failure be it timeout etc.
 #    deploy:
 #      resources:
 #        limits:
