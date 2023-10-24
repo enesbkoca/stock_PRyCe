@@ -5,7 +5,7 @@ import random
 
 while True:
     try:
-        conn = rpyc.connect('localhost', 80)
+        conn = rpyc.connect('localhost', 8080)
 
         symbols = [
             "AAPL", "GOOGL", "MSFT", "AMZN", "META", "TSLA", "NVDA", "JPM", "GS", "JNJ",
