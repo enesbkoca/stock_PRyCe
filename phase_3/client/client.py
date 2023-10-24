@@ -5,7 +5,7 @@ import random
 
 while True:
     try:
-        conn = rpyc.connect('localhost', 80)
+        conn = rpyc.connect('localhost', 8080)
 
         symbols = [
             "AAPL", "GOOGL", "MSFT", "AMZN", "META", "TSLA", "NVDA", "JPM", "GS", "JNJ",
@@ -28,10 +28,9 @@ while True:
             print(f"Latest open price for {random_symbol} is ${price:.2f} | ({timestamp}) | {duration}", flush=True)
         else:
             print(f"Stock {random_symbol} not found or APIs not available", flush=True)
-            
+
         conn.close()
         time.sleep(5)
-        
+
     except Exception as e:
         print(f"Client retrying to connect!")
- 

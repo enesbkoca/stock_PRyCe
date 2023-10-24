@@ -8,6 +8,12 @@ services:
       - PORT=18861
     ports:
       - "18861:18861"
+    healthcheck:
+      test: ["CMD", "python", "./server/health_check.py"]
+      interval: 5s
+      retries: 2
+      start_period: 5s
+      timeout: 60s
 #    deploy:
 #      resources:
 #        limits:
@@ -49,13 +55,13 @@ services:
     network_mode:
       "host"
     deploy:
-      replicas: 10
+      replicas: 3
 
   nginx:
     build:
       context: ./nginx
     ports:
-      - "80:80"
+      - "8080:8080"
     depends_on:
       - rpyc_backend_1
       - rpyc_backend_2

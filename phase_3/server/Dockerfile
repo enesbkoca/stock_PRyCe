@@ -10,8 +10,5 @@ WORKDIR app
 COPY server.py .
 COPY api.py .
 
-# Expose port
-EXPOSE 18861
-
 # Run the Python script when the container starts
 CMD ["python", "-u", "server.py"]
