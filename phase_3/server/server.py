@@ -5,13 +5,18 @@ from api import get_price
 from rpyc.utils.server import ThreadedServer
 
 
+
+
 class StockPrice(rpyc.Service):
+    connections = 0
     def on_connect(self, conn):
-        # print("Client Connected")
+        StockPrice.connections += 1
+        print(f"Client Connected. Server's Connections: {self.connections}")
         pass
 
     def on_disconnect(self, conn):
-        # print("Client Disconnected")
+        StockPrice.connections -= 1
+        print(f"Client Disconnected. Server's Connections: {self.connections}")
         pass
 
     def exposed_get_price(self, stock):
