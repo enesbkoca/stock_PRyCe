@@ -23,7 +23,7 @@ def send_request(symbol,cnt):
 
     except Exception as e:
         if cnt < 3:
-            print(f"Interface retrying to connect!")
+            print(f"Interface retrying to connect and search for the price of ",symbol)
             send_request(symbol,cnt+1)
         else:
             print(f"System is down!")
@@ -43,7 +43,7 @@ while True:
 
     app(random_symbol)
 
-    time.sleep(15)
+    time.sleep(10)
 
     # try:
     #     conn = rpyc.connect('localhost', 8080)
