@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  rpyc_backend_1:
+    build:
+      context: ./server
+    environment:
+      - PORT=18861
+    ports:
+      - "18861:18861"
+    healthcheck:
+      test: ["CMD", "python", "./server/health_check.py"]
+      interval: 5s
+      retries: 2
+      start_period: 5s
+      timeout: 60s
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.02'
+#          memory: 50M
+
+
+  rpyc_backend_2:
+    build:
+      context: ./server
+    environment:
+      - PORT=18862
+    ports:
+      - "18862:18862"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.02'
+#          memory: 50M
+
+  rpyc_backend_3:
+    build:
+      context: ./server
+    environment:
+      - PORT=18863
+    ports:
+      - "18863:18863"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.02'
+#          memory: 50M
+
+  client:
+    build:
+      context: ./client
+    depends_on:
+      - nginx
+    network_mode:
+      "host"
+    deploy:
+      replicas: 3
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rpyc_backend_1
+      - rpyc_backend_2
+      - rpyc_backend_3
+
+  statistics:
+    build:
+      context: ./statistics
+    depends_on:
+      - nginx
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

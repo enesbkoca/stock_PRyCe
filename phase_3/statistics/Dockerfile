@@ -1,17 +1,13 @@
 FROM python:3.9-slim-buster
 
 # App dependencies
-RUN pip install rpyc requests
+RUN pip install docker
 
 # Set the working directory
 WORKDIR app
 
 # Install app
-COPY server.py .
-COPY api.py .
-
-# Expose port
-EXPOSE 18861
+COPY statistics.py .
 
 # Run the Python script when the container starts
-CMD ["python", "-u", "server.py"]
+CMD ["python", "-u", "statistics.py"]
